@@ -18,12 +18,12 @@ const Home = () => {
 	}
 
 	function eliminarTarea(event) {
-		setLista(prev => prev.filter((_,i) => i !== event));
+		setLista(prev => prev.filter((x,i) => i !== event));
 		}
 
 	return (
 		<div className="text-center">
-			<h1 className="text-light-emphasis fw-light fs-1">todos</h1>
+			<h1 className="text-light-emphasis fw-light fs-1">Todo List  </h1>
 			<input
 				type="text"
 				value={inputValue}
@@ -34,11 +34,11 @@ const Home = () => {
 				placeholder="What needs to be done"
 				style={{ width: '300px', backgroundColor: 'white', border: 'none' }}
 			/>
-			<ul className='list-group'>
+			<ul className='list-group' style={{marginTop: '2px'}}>
 				{lista.map((nombre, i) => (
-					<li key={i} style={{ width: '300px', textAlign: 'left' }} className="list-group-item d-flex justify-content-start align-items-center mx-auto shadow-sm" >{nombre}
+					<li key={i} style={{ width: '300px', textAlign: 'left'}} className="list-group-item d-flex justify-content-start align-items-center mx-auto shadow-sm" >{nombre}
 						<span onClick={() => eliminarTarea(i)} style={{ cursor: 'pointer', marginLeft: 'auto'}}>
-							<i className="fas fa-times"  ></i>
+							<i className="fas fa-times "></i>
 						</span></li>
 				))}
 			</ul>

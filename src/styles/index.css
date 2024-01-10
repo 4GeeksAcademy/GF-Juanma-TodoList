@@ -3,3 +3,9 @@ body {
     background-color: #A3A5C9;
 
 }
+.list-group-item .fa-times {
+    visibility: hidden;
+}
+.list-group-item:hover .fa-times {
+    visibility: visible;
+}
