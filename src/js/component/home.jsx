@@ -1,59 +1,48 @@
 import React, { useState } from 'react';
 
 const Home = () => {
-	const [inputValue, setInputValue] = useState('');
-	const [todos, setTodos] = useState([]);
-	const [selectedTodo, setSelectedTodo] = useState(null);
+	const [inputValue, setInputValue] = useState("");
+	const [lista, setLista] = useState([]);
 
 	function guardarCambios(event) {
 		setInputValue(event.target.value);
+
 	}
 
-	function agregarTarea(event) {
-		event.preventDefault();
-		if (inputValue === '') return;
-		setTodos([...todos, inputValue]);
-		setInputValue('');
+	function handleKeyPress(e) {
+		if (e.key == "Enter") {
+			setLista(prev => prev.concat([inputValue]))
+			setInputValue("")
+		}
+
 	}
 
-	function handleDelete(index) {
-		const newTodos = [...todos];
-		newTodos.splice(index, 1);
-		setTodos(newTodos);
-		setSelectedTodo(null);
-	}
+	function eliminarTarea(event) {
+		setLista(prev => prev.filter((_,i) => i !== event));
+		}
 
 	return (
 		<div className="text-center">
-			<h1 className="text-light fw-light fs-1">todos</h1>
+			<h1 className="text-light-emphasis fw-light fs-1">todos</h1>
+			<input
+				type="text"
+				value={inputValue}
+				onChange={guardarCambios}
+				onKeyDown={handleKeyPress}
+				className="form-control mx-auto shadow-sm"
+				id="exampleFormControlInput1"
+				placeholder="What needs to be done"
+				style={{ width: '300px', backgroundColor: 'white', border: 'none' }}
+			/>
+			<ul className='list-group'>
+				{lista.map((nombre, i) => (
+					<li key={i} style={{ width: '300px', textAlign: 'left' }} className="list-group-item d-flex justify-content-start align-items-center mx-auto shadow-sm" >{nombre}
+						<span onClick={() => eliminarTarea(i)} style={{ cursor: 'pointer', marginLeft: 'auto'}}>
+							<i className="fas fa-times"  ></i>
+						</span></li>
+				))}
+			</ul>
 
-			<form onSubmit={agregarTarea}>
-				<input
-					type="text"
-					value={inputValue}
-					onChange={guardarCambios}
-					className="form-control mx-auto shadow-sm"
-					id="exampleFormControlInput1"
-					placeholder="What needs to be done"
-					style={{ width: '300px', backgroundColor: 'white', border: 'none' }}
-				/>
-			</form>
-			<div className="text-center list-container">
-				<ul className="list">
-					{todos.length === 0 ? <p>No hay tareas, añadir tareas</p> :
-						todos.map((todo, index) => (
-							<li className='list-item' key={index}>
-								<span>{todo}</span>
-								{selectedTodo === index && (
-									<button onClick={() => handleDelete(index)} >
-										<i className="fas fa-times"></i>
-									</button>
-								)}
-							</li>
-						))
-					}
-				</ul>
-			</div>
 		</div>
 
 	);

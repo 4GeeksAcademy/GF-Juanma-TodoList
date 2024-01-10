@@ -1,21 +1,5 @@
-list-container {
-    width: 100%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
-}
+body {
+    font-family: 'Arial';
+    background-color: #A3A5C9;
 
-.list {
-    padding: 0;
-    margin: auto;
-    align-items: center;
-}
-
-.list-item {
-    display: flex;
-    align-items: center; 
-    justify-content: space-between;
-    padding: 8px; 
-    border-bottom: 1px solid #ccc; 
 }
